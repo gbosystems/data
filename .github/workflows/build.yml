@@ -25,7 +25,7 @@ jobs:
         - name: Download ports
           shell: bash
           run: |
-            node "${{ github.workspace }}/scripts/download-ports.mjs" --path ../data/ports
+            node "${{ github.workspace }}/scripts/download-ports.mjs" --path "${{ github.workspace }}/data/ports"
           env:
             NODE_EXTRA_CA_CERTS: ${{ github.workspace }}/scripts/nga.mil-trust-chain.pem
         - name: Commit changes
