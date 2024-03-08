@@ -1,0 +1,40 @@
+# SEE: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+# SEE: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+name: Build
+run-name: synthetic api ${{ github.ref_name }}
+on: workflow_dispatch
+env:
+    buildConfiguration: 'Release'
+    artifactName: 'archive'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+          with:
+            ref: main
+            path: ./data
+        - uses: actions/checkout@v4
+          with:
+            repository: gbosystems/synthetic-api-scripts
+            ref: main
+            path: ./scripts
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: 'npm'
+        - name: Download ports
+          shell: bash
+          run: |
+            node "${{ github.workspace }}/scripts/download-ports.mjs" --path ../data/ports
+          env:
+            NODE_EXTRA_CA_CERTS: ${{ github.workspace }}/scripts/nga.mil-trust-chain.pem
+        - name: Commit changes
+          shell: bash
+          run: |
+            cd ./data
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "Periodic download"
+            git push
