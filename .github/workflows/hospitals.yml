@@ -1,6 +1,6 @@
 # SEE: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 # SEE: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-name: Build
+name: Hospitals
 run-name: Hospitals ${{ github.ref_name }}
 on: workflow_dispatch
 env:
