@@ -37,8 +37,9 @@ jobs:
           shell: bash
           run: |
             cd ./target
+            date=$(date +%F)
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add .
-            git commit -m "Automated download"
+            git commit -m "Automated download on $date"
             git push
