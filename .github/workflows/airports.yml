@@ -1,7 +1,7 @@
 # SEE: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 # SEE: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 name: Build
-run-name: Ports ${{ github.ref_name }}
+run-name: Airports ${{ github.ref_name }}
 on: workflow_dispatch
 env:
     buildConfiguration: 'Release'
@@ -19,15 +19,20 @@ jobs:
             repository: gbosystems/synthetic-api-scripts
             ref: main
             path: ./scripts
+        - uses: actions/checkout@v4
+          with:
+            repository: davidmegginson/ourairports-data
+            ref: main
+            path: ./data/airports
         - uses: actions/setup-node@v4
           with:
             node-version: 20
-        - name: Download ports
+            cache: npm
+            cache-dependency-path: ./scripts
+        - name: Process airports
           shell: bash
           run: |
-            node "${{ github.workspace }}/scripts/download-ports.mjs" --path "${{ github.workspace }}/target/ports"
-          env:
-            NODE_EXTRA_CA_CERTS: ${{ github.workspace }}/scripts/nga.mil-trust-chain.pem
+            node "${{ github.workspace }}/scripts/process-airports.mjs" --path "${{ github.workspace }}/target/airports"
         - name: Commit changes
           shell: bash
           run: |
