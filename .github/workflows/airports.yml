@@ -32,7 +32,9 @@ jobs:
         - name: Process airports
           shell: bash
           run: |
-            node "${{ github.workspace }}/scripts/process-airports.mjs" --path "${{ github.workspace }}/target/airports"
+            rm -r -f "${{ github.workspace }}/target/airports/"
+            npm install "${{ github.workspace }}/scripts/"
+            node "${{ github.workspace }}/scripts/process-airports.mjs" --source "${{ github.workspace }}/data/airports" --destination "${{ github.workspace }}/target/airports"
         - name: Commit changes
           shell: bash
           run: |
