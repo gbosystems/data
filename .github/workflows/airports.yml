@@ -2,7 +2,10 @@
 # SEE: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 name: Airports
 run-name: Airports ${{ github.ref_name }}
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+    schedule:
+      - cron: "0 3 * * *"
 env:
     buildConfiguration: 'Release'
     artifactName: 'archive'
