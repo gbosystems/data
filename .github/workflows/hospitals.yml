@@ -31,8 +31,8 @@ jobs:
           shell: bash
           run: |
             cp -r "${{ github.workspace }}/target/hospitals" "${{ runner.temp }}/hospitals"
-            rm -r -f "${{ github.workspace }}/target/hospitals/"
-            ls -R "${{ runner.temp }}"
+            rm -r -f "${{ github.workspace }}/target/hospitals/*"
+            cp "${{ runner.temp }}/hospitals/location-override.json" "${{ github.workspace }}/target/hospitals/location-override.json"
             node "${{ github.workspace }}/scripts/download-hospitals.mjs" --path "${{ github.workspace }}/target/hospitals" --existing "${{ runner.temp }}/hospitals" --hereApiKey "${{ secrets.HERE_API_KEY }}"
         - name: Commit changes
           shell: bash
