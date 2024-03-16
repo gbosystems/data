@@ -16,7 +16,7 @@ jobs:
             path: ./target
         - uses: actions/checkout@v4
           with:
-            repository: gbosystems/synthetic-api-scripts
+            repository: gbosystems/data-scripts
             ref: main
             path: ./scripts
         - uses: actions/setup-node@v4
