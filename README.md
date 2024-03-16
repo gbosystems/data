@@ -6,7 +6,7 @@
 
 The programmatic entry point for each dataset is a `metadata.json` file. Given the datasets `slug`, its metadata file can be found at the following location:
 
-    https://github.com/gbosystems/synthetic-api/raw/main/{slug}/metadata.json
+    https://github.com/gbosystems/data/raw/main/{slug}/metadata.json
 
 This file contains a single JSON object which conforms to the following schema:
 
@@ -24,15 +24,20 @@ This file contains a single JSON object which conforms to the following schema:
 
 ## Datasets
 
-### Ports
-
-World wide port dataset maintained by the [US National Geospatial-Intelligence Agency](https://www.nga.mil/).
-
-Slug: `ports`
-
 ### Airports
 
 World wide airport dataset maintained by [OurAirports](https://ourairports.com/).
 
 Slug: `airports`
 
+### Hospitals
+
+US-only hospital dataset built with data maintained by [U.S Centers for Medicare & Medicaid Services](https://www.cms.gov/), geocoded using [HERE Technologies](https://www.here.com/) services.
+
+Slug: `hospitals`
+
+### Ports
+
+World wide port dataset maintained by the [US National Geospatial-Intelligence Agency](https://www.nga.mil/).
+
+Slug: `ports`
