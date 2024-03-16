@@ -32,7 +32,7 @@ jobs:
           run: |
             cp -r "${{ github.workspace }}/target/hospitals" "${{ runner.temp }}/hospitals"
             rm -r -f "${{ github.workspace }}/target/hospitals/"
-            ls -rla "${{ runner.temp }}"
+            ls -R "${{ runner.temp }}"
             exit 1
             node "${{ github.workspace }}/scripts/download-hospitals.mjs" --path "${{ github.workspace }}/target/hospitals" --existing "${{ runner.temp }}/hospitals" --hereApiKey "${{ secrets.HERE_API_KEY }}"
         - name: Commit changes
