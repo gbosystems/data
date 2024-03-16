@@ -2,7 +2,10 @@
 # SEE: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 name: Hospitals
 run-name: Hospitals ${{ github.ref_name }}
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+    schedule:
+      - cron: "20 3 * * *"
 env:
     buildConfiguration: 'Release'
     artifactName: 'archive'
@@ -27,7 +30,11 @@ jobs:
         - name: Download hospitals
           shell: bash
           run: |
-            node "${{ github.workspace }}/scripts/download-hospitals.mjs" --path "${{ github.workspace }}/target/hospitals"
+            cp -r "${{ github.workspace }}/target/hospitals" "${{ runner.temp }}/hospitals"
+            rm -r -f "${{ github.workspace }}/target/hospitals/"
+            ls -la "${{ runner.temp }}"
+            exit 1
+            node "${{ github.workspace }}/scripts/download-hospitals.mjs" --path "${{ github.workspace }}/target/hospitals" --existing "${{ runner.temp }}/hospitals" --hereApiKey "${{ secrets.HERE_API_KEY }}"
         - name: Commit changes
           shell: bash
           run: |
