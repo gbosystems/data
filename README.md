@@ -1,4 +1,4 @@
-# synthetic-api
+# data
 
  Synthetic GeoJSON API with select pre-computed queries. 
 
@@ -23,8 +23,6 @@ This file contains a single JSON object which conforms to the following schema:
       * `{property-name}`: `array` - Array of primitive values which can be used to build the endpoint URL
 
 ## Datasets
-
-
 
 ### Ports
 
